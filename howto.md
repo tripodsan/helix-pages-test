@@ -29,4 +29,4 @@
 1. go to [service bus in azure portal](https://portal.azure.com/#@adobe.onmicrosoft.com/resource/subscriptions/07d1d753-4bfc-4012-9958-35592a40a3fa/resourceGroups/helix-prod/providers/Microsoft.ServiceBus/namespaces/hlxobs/topics) 
 2. create new topic: `tripodsan/helix-pages-test/master`
 3. go to the topic
-4. create a new subscription: helix-index--helix-services--cache-flush_40latest
+4. create a new subscription: `helix-index--helix-services--cache-flush_40latest`
