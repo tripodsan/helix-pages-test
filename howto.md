@@ -70,19 +70,30 @@ subscribed to it. currently this is only possible by creating a bunch of openwhi
 
 1. create new trigger for your repository
    ```
-   $ wsk trigger create tripodsan--helix-pages-test--master -p AZURE_SERVICE_BUS_TOPIC_NAME tripodsan/helix-pages-test/master
+   $ wsk trigger create \
+       tripodsan--helix-pages-test--master \
+       -p AZURE_SERVICE_BUS_TOPIC_NAME tripodsan/helix-pages-test/master
    ```
 2. create a bound wsk package for your subscription
    ```   
-   $ wsk package bind helix-services helix-index--helix-services--cache-flush_40latest -p AZURE_SERVICE_BUS_SUBSCRIPTION_NAME helix-index--helix-services--cache-flush_40latest
+   $ wsk package bind \
+       helix-services \
+       helix-index--helix-services--cache-flush_40latest \
+       -p AZURE_SERVICE_BUS_SUBSCRIPTION_NAME helix-index--helix-services--cache-flush_40latest
    ```
 3. create a sequence that invokes the controller
    ```
-   $ wsk action create --sequence helix-index--helix-services--cache-flush_40latest-sequence helix-index--helix-services--cache-flush_40latest/proxy,helix-index--helix-services--cache-flush_40latest/task-controller@latest
+   $ wsk action create --sequence \
+       helix-index--helix-services--cache-flush_40latest-sequence \
+       helix-index--helix-services--cache-flush_40latest/proxy, \
+       helix-index--helix-services--cache-flush_40latest/task-controller@latest
    ```
 4. create a rule that links the trigger to the sequence:
    ```
-   $ wsk rule create tripodsan--helix-pages-test--master--helix-index--helix-services--cache-flush_40latest tripodsan--helix-pages-test--master helix-index--helix-services--cache-flush_40latest-sequence
+   $ wsk rule create \
+       tripodsan--helix-pages-test--master--helix-index--helix-services--cache-flush_40latest \
+       tripodsan--helix-pages-test--master \
+       helix-index--helix-services--cache-flush_40latest-sequence
    ```
    
    
