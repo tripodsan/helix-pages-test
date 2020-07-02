@@ -33,6 +33,41 @@
 
 ## set up task-controller
 
+So goal is to create a trigger for the repository that is observed, which will invoke all the task-controllers that are
+subscribed to it. currently this is only possible by creating a bunch of openwhisk objects
+
+```
+┌───────────────────┐                                                                   
+│      trigger      │                                                                   
+│                   │             ┌──────────────────────────┐                          
+│ param: TOPIC_NAME │             │     bound package ->     │                          
+└───────────────────┘             │      helix-services      ├─────────────────────────┐
+          ┌──────────────────┐    │                          │                         │
+          │       rule       │    │   params: SUBSCRIPTION   │     helix-services      │
+          └──────────────────┘    └─────────────────────────┬┘                         │
+                       ┌─────────────────────────────────┐  │                          │
+                       │           ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │  └──────────────────────────┘
+                       │               Proxy action      │    ┌────────────────────┐    
+                       │           │                   │ │    │    Proxy action    │    
+                       │Sequence    ─ ─ ─ ─ ─ ─ ─ ─ ─ ─  │    │                    │    
+                       │           ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │    └────────────────────┘    
+                       │                 Sequence        │    ┌────────────────────┐    
+                       │           │ controller@latest │ │    │      Sequence      │    
+                       │            ─ ─ ─ ─ ─ ─ ─ ─ ─ ─  │    │ controller@latest  │    
+                       └─────────────────────────────────┘    └────────────────────┘    
+                                                              ┌────────────────────┐    
+                                                              │ controller@v1.2.3  │    
+                                                              │                    │    
+                                                              └────────────────────┘    
+```
+
+- The `trigger` is triggered and sets the `TOPIC_NAME` param to the payload.
+- Via the `rule` it invokes the `sequence` that has 2 components:
+  - the `bound/proxy` action, that lives in the bound package and adds the `SUBSCRIPTION` param to the payload
+  - the `controller@latest` action, which is a sequence that contains the real `controller@v1.2.3` action.
+  
+  
+
 1. create new trigger for your repository
    ```
    $ wsk trigger create tripodsan--helix-pages-test--master -p AZURE_SERVICE_BUS_TOPIC_NAME tripodsan/helix-pages-test/master
