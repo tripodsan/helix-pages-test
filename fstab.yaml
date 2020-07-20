@@ -1,3 +1,5 @@
 mountpoints:
   /gdocs: "https://drive.google.com/drive/folders/1snjgJoqKO71T--uLIAsindAl82FuOtrR"
   /office: "https://adobe-my.sharepoint.com/personal/tripod_adobe_com/Documents/helix-content"
+  /google-home.md: "1aSLfH8baMTP84zvGms47bI82q0YxlhB-pMDzSXX4Bmw"
+  /onedrive-home.md: "https://adobe.sharepoint.com/:w:/r/sites/cg-helix/Shared%20Documents/word2md-unit-tests/homepage.docx?d=w8178a83d4b52491dab36a920e0c0e353&csf=1&web=1&e=EQG2T2"
