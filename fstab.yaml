@@ -1,4 +1,4 @@
-#mountpoints:
+mountpoints:
 #  /gdocs: "https://drive.google.com/drive/folders/1snjgJoqKO71T--uLIAsindAl82FuOtrR"
 #  /office: "https://adobe.sharepoint.com/:f:/r/sites/cg-helix/Shared%20Documents/word2md-unit-tests?csf=1&web=1&e=EjBNiJ"
 #  /google-home.md: "gdrive:1aSLfH8baMTP84zvGms47bI82q0YxlhB-pMDzSXX4Bmw"
